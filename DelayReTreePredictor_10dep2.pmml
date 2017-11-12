@@ -1,0 +1,1766 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PMML xmlns="http://www.dmg.org/PMML-4_3" version="4.3">
+	<Header>
+		<Application name="JPMML-SkLearn" version="1.4.0"/>
+		<Timestamp>2017-11-10T05:25:29Z</Timestamp>
+	</Header>
+	<MiningBuildTask>
+		<Extension>PMMLPipeline(steps=[('classifier', DecisionTreeRegressor(criterion='mse', max_depth=10, max_features=None,
+           max_leaf_nodes=None, min_impurity_split=1e-07,
+           min_samples_leaf=6, min_samples_split=2,
+           min_weight_fraction_leaf=0.0, presort=False, random_state=None,
+           splitter='best'))])</Extension>
+	</MiningBuildTask>
+	<DataDictionary>
+		<DataField name="delay" optype="continuous" dataType="double"/>
+		<DataField name="stop_id" optype="continuous" dataType="float"/>
+		<DataField name="route_id" optype="continuous" dataType="float"/>
+		<DataField name="range_x" optype="continuous" dataType="float"/>
+		<DataField name="delayh_mean" optype="continuous" dataType="float"/>
+		<DataField name="delayh_std" optype="continuous" dataType="float"/>
+		<DataField name="delayp_mean" optype="continuous" dataType="float"/>
+		<DataField name="delayp_std" optype="continuous" dataType="float"/>
+	</DataDictionary>
+	<TransformationDictionary>
+		<DerivedField name="double(delayh_std)" optype="continuous" dataType="double">
+			<FieldRef field="delayh_std"/>
+		</DerivedField>
+		<DerivedField name="double(delayp_mean)" optype="continuous" dataType="double">
+			<FieldRef field="delayp_mean"/>
+		</DerivedField>
+		<DerivedField name="double(delayh_mean)" optype="continuous" dataType="double">
+			<FieldRef field="delayh_mean"/>
+		</DerivedField>
+		<DerivedField name="double(range_x)" optype="continuous" dataType="double">
+			<FieldRef field="range_x"/>
+		</DerivedField>
+		<DerivedField name="double(delayp_std)" optype="continuous" dataType="double">
+			<FieldRef field="delayp_std"/>
+		</DerivedField>
+		<DerivedField name="double(route_id)" optype="continuous" dataType="double">
+			<FieldRef field="route_id"/>
+		</DerivedField>
+		<DerivedField name="double(stop_id)" optype="continuous" dataType="double">
+			<FieldRef field="stop_id"/>
+		</DerivedField>
+	</TransformationDictionary>
+	<TreeModel functionName="regression" splitCharacteristic="binarySplit">
+		<MiningSchema>
+			<MiningField name="delay" usageType="target"/>
+			<MiningField name="delayh_std"/>
+			<MiningField name="delayp_mean"/>
+			<MiningField name="delayh_mean"/>
+			<MiningField name="range_x"/>
+			<MiningField name="delayp_std"/>
+			<MiningField name="route_id"/>
+			<MiningField name="stop_id"/>
+		</MiningSchema>
+		<Node id="1">
+			<True/>
+			<Node id="2">
+				<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="3008.17138671875"/>
+				<Node id="3">
+					<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="432.4285888671875"/>
+					<Node id="4">
+						<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="-512.3077392578125"/>
+						<Node id="5">
+							<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="-1498.9473876953125"/>
+							<Node id="6">
+								<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="-1246.0714111328125"/>
+								<Node id="7" score="-2640.0">
+									<SimplePredicate field="double(range_x)" operator="lessOrEqual" value="264.5"/>
+								</Node>
+								<Node id="8" score="-2280.0">
+									<SimplePredicate field="double(range_x)" operator="greaterThan" value="264.5"/>
+								</Node>
+							</Node>
+							<Node id="9">
+								<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="-1246.0714111328125"/>
+								<Node id="10">
+									<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="-863.48486328125"/>
+									<Node id="11">
+										<SimplePredicate field="double(delayp_std)" operator="lessOrEqual" value="1182.684326171875"/>
+										<Node id="12" score="-1260.0">
+											<SimplePredicate field="double(range_x)" operator="lessOrEqual" value="262.5"/>
+										</Node>
+										<Node id="13" score="-1344.0">
+											<SimplePredicate field="double(range_x)" operator="greaterThan" value="262.5"/>
+										</Node>
+									</Node>
+									<Node id="14" score="-1870.909090909091">
+										<SimplePredicate field="double(delayp_std)" operator="greaterThan" value="1182.684326171875"/>
+									</Node>
+								</Node>
+								<Node id="15" score="-2640.0">
+									<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="-863.48486328125"/>
+								</Node>
+							</Node>
+						</Node>
+						<Node id="16">
+							<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="-1498.9473876953125"/>
+							<Node id="17">
+								<SimplePredicate field="double(delayp_std)" operator="lessOrEqual" value="1092.7445068359375"/>
+								<Node id="18">
+									<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="-337.5"/>
+									<Node id="19">
+										<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="-924.2208251953125"/>
+										<Node id="20">
+											<SimplePredicate field="double(delayp_std)" operator="lessOrEqual" value="676.2061157226562"/>
+											<Node id="21">
+												<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="609.2498779296875"/>
+												<Node id="22" score="-1135.3846153846155">
+													<SimplePredicate field="double(range_x)" operator="lessOrEqual" value="254.5"/>
+												</Node>
+												<Node id="23" score="-1221.8181818181818">
+													<SimplePredicate field="double(range_x)" operator="greaterThan" value="254.5"/>
+												</Node>
+											</Node>
+											<Node id="24" score="-800.0">
+												<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="609.2498779296875"/>
+											</Node>
+										</Node>
+										<Node id="25">
+											<SimplePredicate field="double(delayp_std)" operator="greaterThan" value="676.2061157226562"/>
+											<Node id="26" score="-1260.0">
+												<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="456.2449645996094"/>
+											</Node>
+											<Node id="27" score="-1440.0">
+												<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="456.2449645996094"/>
+											</Node>
+										</Node>
+									</Node>
+									<Node id="28">
+										<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="-924.2208251953125"/>
+										<Node id="29">
+											<SimplePredicate field="double(route_id)" operator="lessOrEqual" value="31701.5"/>
+											<Node id="30" score="-780.0">
+												<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="-604.268798828125"/>
+											</Node>
+											<Node id="31">
+												<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="-604.268798828125"/>
+												<Node id="32" score="-771.4285714285714">
+													<SimplePredicate field="double(stop_id)" operator="lessOrEqual" value="3224.0"/>
+												</Node>
+												<Node id="33" score="-766.6666666666666">
+													<SimplePredicate field="double(stop_id)" operator="greaterThan" value="3224.0"/>
+												</Node>
+											</Node>
+										</Node>
+										<Node id="34">
+											<SimplePredicate field="double(route_id)" operator="greaterThan" value="31701.5"/>
+											<Node id="35">
+												<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="-840.0"/>
+												<Node id="36" score="-863.0769230769231">
+													<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="-1278.9473876953125"/>
+												</Node>
+												<Node id="37" score="-946.6666666666666">
+													<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="-1278.9473876953125"/>
+												</Node>
+											</Node>
+											<Node id="38">
+												<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="-840.0"/>
+												<Node id="39" score="-780.0">
+													<SimplePredicate field="double(delayp_std)" operator="lessOrEqual" value="384.12835693359375"/>
+												</Node>
+												<Node id="40" score="-890.5263157894736">
+													<SimplePredicate field="double(delayp_std)" operator="greaterThan" value="384.12835693359375"/>
+												</Node>
+											</Node>
+										</Node>
+									</Node>
+								</Node>
+								<Node id="41">
+									<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="-337.5"/>
+									<Node id="42" score="-1440.0">
+										<SimplePredicate field="double(route_id)" operator="lessOrEqual" value="31591.0"/>
+									</Node>
+									<Node id="43">
+										<SimplePredicate field="double(route_id)" operator="greaterThan" value="31591.0"/>
+										<Node id="44">
+											<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="370.15521240234375"/>
+											<Node id="45" score="-296.0">
+												<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="292.85797119140625"/>
+											</Node>
+											<Node id="46" score="-300.0">
+												<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="292.85797119140625"/>
+											</Node>
+										</Node>
+										<Node id="47">
+											<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="370.15521240234375"/>
+											<Node id="48">
+												<SimplePredicate field="double(range_x)" operator="lessOrEqual" value="263.5"/>
+												<Node id="49" score="0.0">
+													<SimplePredicate field="double(range_x)" operator="lessOrEqual" value="256.5"/>
+												</Node>
+												<Node id="50" score="140.0">
+													<SimplePredicate field="double(range_x)" operator="greaterThan" value="256.5"/>
+												</Node>
+											</Node>
+											<Node id="51" score="0.0">
+												<SimplePredicate field="double(range_x)" operator="greaterThan" value="263.5"/>
+											</Node>
+										</Node>
+									</Node>
+								</Node>
+							</Node>
+							<Node id="52" score="-2640.0">
+								<SimplePredicate field="double(delayp_std)" operator="greaterThan" value="1092.7445068359375"/>
+							</Node>
+						</Node>
+					</Node>
+					<Node id="53">
+						<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="-512.3077392578125"/>
+						<Node id="54">
+							<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="103.87699890136719"/>
+							<Node id="55">
+								<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="-130.4545440673828"/>
+								<Node id="56">
+									<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="-348.54547119140625"/>
+									<Node id="57">
+										<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="122.7056884765625"/>
+										<Node id="58">
+											<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="-39.17646789550781"/>
+											<Node id="59" score="-222.85714285714286">
+												<SimplePredicate field="double(stop_id)" operator="lessOrEqual" value="5013.0"/>
+											</Node>
+											<Node id="60">
+												<SimplePredicate field="double(stop_id)" operator="greaterThan" value="5013.0"/>
+												<Node id="61" score="-110.76923076923077">
+													<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="84.768310546875"/>
+												</Node>
+												<Node id="62" score="-150.0">
+													<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="84.768310546875"/>
+												</Node>
+											</Node>
+										</Node>
+										<Node id="63">
+											<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="-39.17646789550781"/>
+											<Node id="64">
+												<SimplePredicate field="double(route_id)" operator="lessOrEqual" value="31655.0"/>
+												<Node id="65" score="0.0">
+													<SimplePredicate field="double(stop_id)" operator="lessOrEqual" value="1981.0"/>
+												</Node>
+												<Node id="66" score="33.333333333333336">
+													<SimplePredicate field="double(stop_id)" operator="greaterThan" value="1981.0"/>
+												</Node>
+											</Node>
+											<Node id="67">
+												<SimplePredicate field="double(route_id)" operator="greaterThan" value="31655.0"/>
+												<Node id="68" score="0.0">
+													<SimplePredicate field="double(stop_id)" operator="lessOrEqual" value="5851.5"/>
+												</Node>
+												<Node id="69" score="-20.0">
+													<SimplePredicate field="double(stop_id)" operator="greaterThan" value="5851.5"/>
+												</Node>
+											</Node>
+										</Node>
+									</Node>
+									<Node id="70">
+										<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="122.7056884765625"/>
+										<Node id="71">
+											<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="-506.25"/>
+											<Node id="72">
+												<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="637.0262451171875"/>
+												<Node id="73" score="-637.7777777777778">
+													<SimplePredicate field="double(range_x)" operator="lessOrEqual" value="256.5"/>
+												</Node>
+												<Node id="74" score="-458.01526717557255">
+													<SimplePredicate field="double(range_x)" operator="greaterThan" value="256.5"/>
+												</Node>
+											</Node>
+											<Node id="75">
+												<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="637.0262451171875"/>
+												<Node id="76" score="-960.0">
+													<SimplePredicate field="double(range_x)" operator="lessOrEqual" value="259.0"/>
+												</Node>
+												<Node id="77" score="-837.8571428571429">
+													<SimplePredicate field="double(range_x)" operator="greaterThan" value="259.0"/>
+												</Node>
+											</Node>
+										</Node>
+										<Node id="78">
+											<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="-506.25"/>
+											<Node id="79">
+												<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="-26.190475463867188"/>
+												<Node id="80" score="-352.32323232323233">
+													<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="337.8767395019531"/>
+												</Node>
+												<Node id="81" score="-524.0">
+													<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="337.8767395019531"/>
+												</Node>
+											</Node>
+											<Node id="82">
+												<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="-26.190475463867188"/>
+												<Node id="83" score="-351.8181818181818">
+													<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="-378.8038330078125"/>
+												</Node>
+												<Node id="84" score="-213.10344827586206">
+													<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="-378.8038330078125"/>
+												</Node>
+											</Node>
+										</Node>
+									</Node>
+								</Node>
+								<Node id="85">
+									<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="-348.54547119140625"/>
+									<Node id="86">
+										<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="-103.48484802246094"/>
+										<Node id="87">
+											<SimplePredicate field="double(delayp_std)" operator="lessOrEqual" value="384.8300476074219"/>
+											<Node id="88">
+												<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="-196.92308044433594"/>
+												<Node id="89" score="-250.2673796791444">
+													<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="227.00851440429688"/>
+												</Node>
+												<Node id="90" score="-396.3636363636364">
+													<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="227.00851440429688"/>
+												</Node>
+											</Node>
+											<Node id="91">
+												<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="-196.92308044433594"/>
+												<Node id="92" score="-292.94117647058823">
+													<SimplePredicate field="double(route_id)" operator="lessOrEqual" value="31609.5"/>
+												</Node>
+												<Node id="93" score="-177.83505154639175">
+													<SimplePredicate field="double(route_id)" operator="greaterThan" value="31609.5"/>
+												</Node>
+											</Node>
+										</Node>
+										<Node id="94">
+											<SimplePredicate field="double(delayp_std)" operator="greaterThan" value="384.8300476074219"/>
+											<Node id="95" score="-703.6363636363636">
+												<SimplePredicate field="double(stop_id)" operator="lessOrEqual" value="3266.0"/>
+											</Node>
+											<Node id="96" score="-515.2941176470588">
+												<SimplePredicate field="double(stop_id)" operator="greaterThan" value="3266.0"/>
+											</Node>
+										</Node>
+									</Node>
+									<Node id="97">
+										<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="-103.48484802246094"/>
+										<Node id="98">
+											<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="65.79574584960938"/>
+											<Node id="99">
+												<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="-2.4000000953674316"/>
+												<Node id="100" score="-106.66666666666667">
+													<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="-39.122257232666016"/>
+												</Node>
+												<Node id="101" score="-51.2">
+													<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="-39.122257232666016"/>
+												</Node>
+											</Node>
+											<Node id="102">
+												<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="-2.4000000953674316"/>
+												<Node id="103" score="-2.535211267605634">
+													<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="5.227272987365723"/>
+												</Node>
+												<Node id="104" score="42.1875">
+													<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="5.227272987365723"/>
+												</Node>
+											</Node>
+										</Node>
+										<Node id="105">
+											<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="65.79574584960938"/>
+											<Node id="106">
+												<SimplePredicate field="double(delayp_std)" operator="lessOrEqual" value="33.7521858215332"/>
+												<Node id="107" score="-133.05343511450383">
+													<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="56.02564239501953"/>
+												</Node>
+												<Node id="108" score="100.42105263157895">
+													<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="56.02564239501953"/>
+												</Node>
+											</Node>
+											<Node id="109">
+												<SimplePredicate field="double(delayp_std)" operator="greaterThan" value="33.7521858215332"/>
+												<Node id="110" score="-200.8">
+													<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="-173.3936767578125"/>
+												</Node>
+												<Node id="111" score="-111.97080291970804">
+													<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="-173.3936767578125"/>
+												</Node>
+											</Node>
+										</Node>
+									</Node>
+								</Node>
+							</Node>
+							<Node id="112">
+								<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="-130.4545440673828"/>
+								<Node id="113">
+									<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="-25.286884307861328"/>
+									<Node id="114">
+										<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="-6.477272987365723"/>
+										<Node id="115">
+											<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="-71.22377014160156"/>
+											<Node id="116">
+												<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="-267.03948974609375"/>
+												<Node id="117" score="-73.84615384615384">
+													<SimplePredicate field="double(delayp_std)" operator="lessOrEqual" value="91.48170471191406"/>
+												</Node>
+												<Node id="118" score="-412.258064516129">
+													<SimplePredicate field="double(delayp_std)" operator="greaterThan" value="91.48170471191406"/>
+												</Node>
+											</Node>
+											<Node id="119">
+												<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="-267.03948974609375"/>
+												<Node id="120" score="-251.1627906976744">
+													<SimplePredicate field="double(stop_id)" operator="lessOrEqual" value="1659.0"/>
+												</Node>
+												<Node id="121" score="-138.75">
+													<SimplePredicate field="double(stop_id)" operator="greaterThan" value="1659.0"/>
+												</Node>
+											</Node>
+										</Node>
+										<Node id="122">
+											<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="-71.22377014160156"/>
+											<Node id="123">
+												<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="-44.46428680419922"/>
+												<Node id="124" score="-95.6792873051225">
+													<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="-45.161293029785156"/>
+												</Node>
+												<Node id="125" score="-182.7906976744186">
+													<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="-45.161293029785156"/>
+												</Node>
+											</Node>
+											<Node id="126">
+												<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="-44.46428680419922"/>
+												<Node id="127" score="-61.1660777385159">
+													<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="182.83506774902344"/>
+												</Node>
+												<Node id="128" score="-14.181818181818182">
+													<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="182.83506774902344"/>
+												</Node>
+											</Node>
+										</Node>
+									</Node>
+									<Node id="129">
+										<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="-6.477272987365723"/>
+										<Node id="130">
+											<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="601.5867919921875"/>
+											<Node id="131">
+												<SimplePredicate field="double(delayp_std)" operator="lessOrEqual" value="244.728271484375"/>
+												<Node id="132" score="-19.13482791285128">
+													<SimplePredicate field="double(route_id)" operator="lessOrEqual" value="31818.0"/>
+												</Node>
+												<Node id="133" score="-306.6666666666667">
+													<SimplePredicate field="double(route_id)" operator="greaterThan" value="31818.0"/>
+												</Node>
+											</Node>
+											<Node id="134" score="-272.3076923076923">
+												<SimplePredicate field="double(delayp_std)" operator="greaterThan" value="244.728271484375"/>
+											</Node>
+										</Node>
+										<Node id="135">
+											<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="601.5867919921875"/>
+											<Node id="136" score="-881.25">
+												<SimplePredicate field="double(delayp_std)" operator="lessOrEqual" value="30.0"/>
+											</Node>
+											<Node id="137">
+												<SimplePredicate field="double(delayp_std)" operator="greaterThan" value="30.0"/>
+												<Node id="138" score="0.0">
+													<SimplePredicate field="double(route_id)" operator="lessOrEqual" value="31637.5"/>
+												</Node>
+												<Node id="139" score="-360.0">
+													<SimplePredicate field="double(route_id)" operator="greaterThan" value="31637.5"/>
+												</Node>
+											</Node>
+										</Node>
+									</Node>
+								</Node>
+								<Node id="140">
+									<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="-25.286884307861328"/>
+									<Node id="141">
+										<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="79.18830871582031"/>
+										<Node id="142">
+											<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="14.86842155456543"/>
+											<Node id="143">
+												<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="-20.71428680419922"/>
+												<Node id="144" score="0.0">
+													<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="25.940828323364258"/>
+												</Node>
+												<Node id="145" score="-40.7514450867052">
+													<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="25.940828323364258"/>
+												</Node>
+											</Node>
+											<Node id="146">
+												<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="-20.71428680419922"/>
+												<Node id="147" score="-9.197969543147208">
+													<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="-5.517970085144043"/>
+												</Node>
+												<Node id="148" score="0.4382855301321302">
+													<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="-5.517970085144043"/>
+												</Node>
+											</Node>
+										</Node>
+										<Node id="149">
+											<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="14.86842155456543"/>
+											<Node id="150">
+												<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="569.7696533203125"/>
+												<Node id="151" score="14.974567650050865">
+													<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="52.916664123535156"/>
+												</Node>
+												<Node id="152" score="58.55172413793103">
+													<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="52.916664123535156"/>
+												</Node>
+											</Node>
+											<Node id="153" score="-480.0">
+												<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="569.7696533203125"/>
+											</Node>
+										</Node>
+									</Node>
+									<Node id="154">
+										<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="79.18830871582031"/>
+										<Node id="155">
+											<SimplePredicate field="double(stop_id)" operator="lessOrEqual" value="6556.0"/>
+											<Node id="156">
+												<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="652.7073974609375"/>
+												<Node id="157" score="54.147651006711406">
+													<SimplePredicate field="double(stop_id)" operator="lessOrEqual" value="5181.5"/>
+												</Node>
+												<Node id="158" score="121.46739130434783">
+													<SimplePredicate field="double(stop_id)" operator="greaterThan" value="5181.5"/>
+												</Node>
+											</Node>
+											<Node id="159">
+												<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="652.7073974609375"/>
+												<Node id="160" score="840.0">
+													<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="658.0645141601562"/>
+												</Node>
+												<Node id="161" score="234.54545454545453">
+													<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="658.0645141601562"/>
+												</Node>
+											</Node>
+										</Node>
+										<Node id="162">
+											<SimplePredicate field="double(stop_id)" operator="greaterThan" value="6556.0"/>
+											<Node id="163">
+												<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="9.285714149475098"/>
+												<Node id="164" score="-40.0">
+													<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="-14.166666030883789"/>
+												</Node>
+												<Node id="165" score="26.73950546290972">
+													<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="-14.166666030883789"/>
+												</Node>
+											</Node>
+											<Node id="166">
+												<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="9.285714149475098"/>
+												<Node id="167" score="131.46067415730337">
+													<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="197.1367645263672"/>
+												</Node>
+												<Node id="168" score="40.23738872403561">
+													<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="197.1367645263672"/>
+												</Node>
+											</Node>
+										</Node>
+									</Node>
+								</Node>
+							</Node>
+						</Node>
+						<Node id="169">
+							<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="103.87699890136719"/>
+							<Node id="170">
+								<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="120.43478393554688"/>
+								<Node id="171">
+									<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="36.5476188659668"/>
+									<Node id="172" score="-690.0">
+										<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="-299.4871826171875"/>
+									</Node>
+									<Node id="173">
+										<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="-299.4871826171875"/>
+										<Node id="174">
+											<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="144.65896606445312"/>
+											<Node id="175">
+												<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="5.760368824005127"/>
+												<Node id="176" score="-37.095435684647306">
+													<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="-16.904762268066406"/>
+												</Node>
+												<Node id="177" score="7.9245283018867925">
+													<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="-16.904762268066406"/>
+												</Node>
+											</Node>
+											<Node id="178">
+												<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="5.760368824005127"/>
+												<Node id="179" score="45.29745042492918">
+													<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="128.8061065673828"/>
+												</Node>
+												<Node id="180" score="160.0">
+													<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="128.8061065673828"/>
+												</Node>
+											</Node>
+										</Node>
+										<Node id="181">
+											<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="144.65896606445312"/>
+											<Node id="182">
+												<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="213.125"/>
+												<Node id="183" score="66.30573248407643">
+													<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="197.5"/>
+												</Node>
+												<Node id="184" score="-130.3448275862069">
+													<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="197.5"/>
+												</Node>
+											</Node>
+											<Node id="185">
+												<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="213.125"/>
+												<Node id="186" score="143.4437086092715">
+													<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="301.414306640625"/>
+												</Node>
+												<Node id="187" score="234.0">
+													<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="301.414306640625"/>
+												</Node>
+											</Node>
+										</Node>
+									</Node>
+								</Node>
+								<Node id="188">
+									<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="36.5476188659668"/>
+									<Node id="189">
+										<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="298.28314208984375"/>
+										<Node id="190">
+											<SimplePredicate field="double(delayp_std)" operator="lessOrEqual" value="193.3303680419922"/>
+											<Node id="191">
+												<SimplePredicate field="double(route_id)" operator="lessOrEqual" value="31601.5"/>
+												<Node id="192" score="60.26315789473684">
+													<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="181.76470947265625"/>
+												</Node>
+												<Node id="193" score="107.60479041916167">
+													<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="181.76470947265625"/>
+												</Node>
+											</Node>
+											<Node id="194">
+												<SimplePredicate field="double(route_id)" operator="greaterThan" value="31601.5"/>
+												<Node id="195" score="107.15808170515098">
+													<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="227.33334350585938"/>
+												</Node>
+												<Node id="196" score="155.71045576407508">
+													<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="227.33334350585938"/>
+												</Node>
+											</Node>
+										</Node>
+										<Node id="197">
+											<SimplePredicate field="double(delayp_std)" operator="greaterThan" value="193.3303680419922"/>
+											<Node id="198">
+												<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="174.14404296875"/>
+												<Node id="199" score="54.09836065573771">
+													<SimplePredicate field="double(range_x)" operator="lessOrEqual" value="257.5"/>
+												</Node>
+												<Node id="200" score="146.4">
+													<SimplePredicate field="double(range_x)" operator="greaterThan" value="257.5"/>
+												</Node>
+											</Node>
+											<Node id="201">
+												<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="174.14404296875"/>
+												<Node id="202" score="246.92307692307693">
+													<SimplePredicate field="double(route_id)" operator="lessOrEqual" value="31639.5"/>
+												</Node>
+												<Node id="203" score="92.85714285714286">
+													<SimplePredicate field="double(route_id)" operator="greaterThan" value="31639.5"/>
+												</Node>
+											</Node>
+										</Node>
+									</Node>
+									<Node id="204">
+										<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="298.28314208984375"/>
+										<Node id="205">
+											<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="298.22369384765625"/>
+											<Node id="206">
+												<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="195.21429443359375"/>
+												<Node id="207" score="66.0">
+													<SimplePredicate field="double(stop_id)" operator="lessOrEqual" value="8668.0"/>
+												</Node>
+												<Node id="208" score="182.85714285714286">
+													<SimplePredicate field="double(stop_id)" operator="greaterThan" value="8668.0"/>
+												</Node>
+											</Node>
+											<Node id="209">
+												<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="195.21429443359375"/>
+												<Node id="210" score="268.2352941176471">
+													<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="400.1205139160156"/>
+												</Node>
+												<Node id="211" score="230.0">
+													<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="400.1205139160156"/>
+												</Node>
+											</Node>
+										</Node>
+										<Node id="212">
+											<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="298.22369384765625"/>
+											<Node id="213">
+												<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="459.93682861328125"/>
+												<Node id="214" score="450.0">
+													<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="336.533447265625"/>
+												</Node>
+												<Node id="215" score="300.0">
+													<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="336.533447265625"/>
+												</Node>
+											</Node>
+											<Node id="216" score="540.0">
+												<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="459.93682861328125"/>
+											</Node>
+										</Node>
+									</Node>
+								</Node>
+							</Node>
+							<Node id="217">
+								<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="120.43478393554688"/>
+								<Node id="218">
+									<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="307.5294189453125"/>
+									<Node id="219">
+										<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="172.91665649414062"/>
+										<Node id="220">
+											<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="453.1257629394531"/>
+											<Node id="221">
+												<SimplePredicate field="double(delayp_std)" operator="lessOrEqual" value="140.27499389648438"/>
+												<Node id="222" score="153.79652605459057">
+													<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="243.04122924804688"/>
+												</Node>
+												<Node id="223" score="59.142857142857146">
+													<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="243.04122924804688"/>
+												</Node>
+											</Node>
+											<Node id="224">
+												<SimplePredicate field="double(delayp_std)" operator="greaterThan" value="140.27499389648438"/>
+												<Node id="225" score="262.90909090909093">
+													<SimplePredicate field="double(route_id)" operator="lessOrEqual" value="31677.0"/>
+												</Node>
+												<Node id="226" score="145.01930501930502">
+													<SimplePredicate field="double(route_id)" operator="greaterThan" value="31677.0"/>
+												</Node>
+											</Node>
+										</Node>
+										<Node id="227">
+											<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="453.1257629394531"/>
+											<Node id="228" score="-140.0">
+												<SimplePredicate field="double(stop_id)" operator="lessOrEqual" value="675.5"/>
+											</Node>
+											<Node id="229">
+												<SimplePredicate field="double(stop_id)" operator="greaterThan" value="675.5"/>
+												<Node id="230" score="60.0">
+													<SimplePredicate field="double(stop_id)" operator="lessOrEqual" value="5681.0"/>
+												</Node>
+												<Node id="231" score="25.161290322580644">
+													<SimplePredicate field="double(stop_id)" operator="greaterThan" value="5681.0"/>
+												</Node>
+											</Node>
+										</Node>
+									</Node>
+									<Node id="232">
+										<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="172.91665649414062"/>
+										<Node id="233">
+											<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="252.66488647460938"/>
+											<Node id="234">
+												<SimplePredicate field="double(delayp_std)" operator="lessOrEqual" value="221.21337890625"/>
+												<Node id="235" score="222.0950704225352">
+													<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="322.9090881347656"/>
+												</Node>
+												<Node id="236" score="292.7368421052632">
+													<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="322.9090881347656"/>
+												</Node>
+											</Node>
+											<Node id="237">
+												<SimplePredicate field="double(delayp_std)" operator="greaterThan" value="221.21337890625"/>
+												<Node id="238" score="158.1818181818182">
+													<SimplePredicate field="double(stop_id)" operator="lessOrEqual" value="6660.5"/>
+												</Node>
+												<Node id="239" score="22.7027027027027">
+													<SimplePredicate field="double(stop_id)" operator="greaterThan" value="6660.5"/>
+												</Node>
+											</Node>
+										</Node>
+										<Node id="240">
+											<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="252.66488647460938"/>
+											<Node id="241">
+												<SimplePredicate field="double(delayp_std)" operator="lessOrEqual" value="75.28976440429688"/>
+												<Node id="242" score="37.77777777777778">
+													<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="171.42855834960938"/>
+												</Node>
+												<Node id="243" score="220.625">
+													<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="171.42855834960938"/>
+												</Node>
+											</Node>
+											<Node id="244">
+												<SimplePredicate field="double(delayp_std)" operator="greaterThan" value="75.28976440429688"/>
+												<Node id="245" score="293.89432485322897">
+													<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="315.0"/>
+												</Node>
+												<Node id="246" score="397.5903614457831">
+													<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="315.0"/>
+												</Node>
+											</Node>
+										</Node>
+									</Node>
+								</Node>
+								<Node id="247">
+									<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="307.5294189453125"/>
+									<Node id="248">
+										<SimplePredicate field="double(delayp_std)" operator="lessOrEqual" value="733.730712890625"/>
+										<Node id="249">
+											<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="212.0"/>
+											<Node id="250">
+												<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="882.1875"/>
+												<Node id="251" score="177.52941176470588">
+													<SimplePredicate field="double(range_x)" operator="lessOrEqual" value="260.5"/>
+												</Node>
+												<Node id="252" score="373.875">
+													<SimplePredicate field="double(range_x)" operator="greaterThan" value="260.5"/>
+												</Node>
+											</Node>
+											<Node id="253" score="1174.2857142857142">
+												<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="882.1875"/>
+											</Node>
+										</Node>
+										<Node id="254">
+											<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="212.0"/>
+											<Node id="255">
+												<SimplePredicate field="double(route_id)" operator="lessOrEqual" value="31602.5"/>
+												<Node id="256" score="427.57894736842104">
+													<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="341.58636474609375"/>
+												</Node>
+												<Node id="257" score="687.6923076923077">
+													<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="341.58636474609375"/>
+												</Node>
+											</Node>
+											<Node id="258">
+												<SimplePredicate field="double(route_id)" operator="greaterThan" value="31602.5"/>
+												<Node id="259" score="400.87193460490465">
+													<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="599.1184692382812"/>
+												</Node>
+												<Node id="260" score="137.5609756097561">
+													<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="599.1184692382812"/>
+												</Node>
+											</Node>
+										</Node>
+									</Node>
+									<Node id="261">
+										<SimplePredicate field="double(delayp_std)" operator="greaterThan" value="733.730712890625"/>
+										<Node id="262" score="1360.0">
+											<SimplePredicate field="double(range_x)" operator="lessOrEqual" value="259.5"/>
+										</Node>
+										<Node id="263" score="1665.0">
+											<SimplePredicate field="double(range_x)" operator="greaterThan" value="259.5"/>
+										</Node>
+									</Node>
+								</Node>
+							</Node>
+						</Node>
+					</Node>
+				</Node>
+				<Node id="264">
+					<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="432.4285888671875"/>
+					<Node id="265">
+						<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="399.0909118652344"/>
+						<Node id="266">
+							<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="285.11297607421875"/>
+							<Node id="267">
+								<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="92.70556640625"/>
+								<Node id="268">
+									<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="27.235294342041016"/>
+									<Node id="269">
+										<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="133.19622802734375"/>
+										<Node id="270" score="-240.0">
+											<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="-52.436973571777344"/>
+										</Node>
+										<Node id="271">
+											<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="-52.436973571777344"/>
+											<Node id="272" score="-60.0">
+												<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="-27.78571319580078"/>
+											</Node>
+											<Node id="273">
+												<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="-27.78571319580078"/>
+												<Node id="274" score="-2.0869565217391304">
+													<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="49.195098876953125"/>
+												</Node>
+												<Node id="275" score="19.35483870967742">
+													<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="49.195098876953125"/>
+												</Node>
+											</Node>
+										</Node>
+									</Node>
+									<Node id="276">
+										<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="133.19622802734375"/>
+										<Node id="277" score="246.66666666666666">
+											<SimplePredicate field="double(delayp_std)" operator="lessOrEqual" value="152.60853576660156"/>
+										</Node>
+										<Node id="278">
+											<SimplePredicate field="double(delayp_std)" operator="greaterThan" value="152.60853576660156"/>
+											<Node id="279" score="22.5">
+												<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="468.0"/>
+											</Node>
+											<Node id="280" score="0.0">
+												<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="468.0"/>
+											</Node>
+										</Node>
+									</Node>
+								</Node>
+								<Node id="281">
+									<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="27.235294342041016"/>
+									<Node id="282">
+										<SimplePredicate field="double(stop_id)" operator="lessOrEqual" value="5652.0"/>
+										<Node id="283">
+											<SimplePredicate field="double(delayp_std)" operator="lessOrEqual" value="98.28482055664062"/>
+											<Node id="284">
+												<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="1140.0"/>
+												<Node id="285" score="360.0">
+													<SimplePredicate field="double(route_id)" operator="lessOrEqual" value="31589.0"/>
+												</Node>
+												<Node id="286" score="146.15384615384616">
+													<SimplePredicate field="double(route_id)" operator="greaterThan" value="31589.0"/>
+												</Node>
+											</Node>
+											<Node id="287" score="10.909090909090908">
+												<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="1140.0"/>
+											</Node>
+										</Node>
+										<Node id="288">
+											<SimplePredicate field="double(delayp_std)" operator="greaterThan" value="98.28482055664062"/>
+											<Node id="289">
+												<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="178.32589721679688"/>
+												<Node id="290" score="56.666666666666664">
+													<SimplePredicate field="double(route_id)" operator="lessOrEqual" value="31597.0"/>
+												</Node>
+												<Node id="291" score="92.3076923076923">
+													<SimplePredicate field="double(route_id)" operator="greaterThan" value="31597.0"/>
+												</Node>
+											</Node>
+											<Node id="292" score="20.0">
+												<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="178.32589721679688"/>
+											</Node>
+										</Node>
+									</Node>
+									<Node id="293">
+										<SimplePredicate field="double(stop_id)" operator="greaterThan" value="5652.0"/>
+										<Node id="294">
+											<SimplePredicate field="double(stop_id)" operator="lessOrEqual" value="8654.0"/>
+											<Node id="295" score="432.0">
+												<SimplePredicate field="double(range_x)" operator="lessOrEqual" value="257.5"/>
+											</Node>
+											<Node id="296">
+												<SimplePredicate field="double(range_x)" operator="greaterThan" value="257.5"/>
+												<Node id="297" score="300.0">
+													<SimplePredicate field="double(range_x)" operator="lessOrEqual" value="264.0"/>
+												</Node>
+												<Node id="298" score="320.0">
+													<SimplePredicate field="double(range_x)" operator="greaterThan" value="264.0"/>
+												</Node>
+											</Node>
+										</Node>
+										<Node id="299">
+											<SimplePredicate field="double(stop_id)" operator="greaterThan" value="8654.0"/>
+											<Node id="300">
+												<SimplePredicate field="double(route_id)" operator="lessOrEqual" value="31605.0"/>
+												<Node id="301" score="196.36363636363637">
+													<SimplePredicate field="double(delayp_std)" operator="lessOrEqual" value="96.90415954589844"/>
+												</Node>
+												<Node id="302" score="360.0">
+													<SimplePredicate field="double(delayp_std)" operator="greaterThan" value="96.90415954589844"/>
+												</Node>
+											</Node>
+											<Node id="303">
+												<SimplePredicate field="double(route_id)" operator="greaterThan" value="31605.0"/>
+												<Node id="304" score="150.0">
+													<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="138.92788696289062"/>
+												</Node>
+												<Node id="305" score="5.454545454545454">
+													<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="138.92788696289062"/>
+												</Node>
+											</Node>
+										</Node>
+									</Node>
+								</Node>
+							</Node>
+							<Node id="306">
+								<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="92.70556640625"/>
+								<Node id="307">
+									<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="215.22726440429688"/>
+									<Node id="308">
+										<SimplePredicate field="double(stop_id)" operator="lessOrEqual" value="7818.0"/>
+										<Node id="309">
+											<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="274.4612121582031"/>
+											<Node id="310">
+												<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="191.9362335205078"/>
+												<Node id="311" score="268.06451612903226">
+													<SimplePredicate field="double(delayp_std)" operator="lessOrEqual" value="310.244873046875"/>
+												</Node>
+												<Node id="312" score="87.27272727272727">
+													<SimplePredicate field="double(delayp_std)" operator="greaterThan" value="310.244873046875"/>
+												</Node>
+											</Node>
+											<Node id="313">
+												<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="191.9362335205078"/>
+												<Node id="314" score="125.37931034482759">
+													<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="795.0"/>
+												</Node>
+												<Node id="315" score="461.53846153846155">
+													<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="795.0"/>
+												</Node>
+											</Node>
+										</Node>
+										<Node id="316">
+											<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="274.4612121582031"/>
+											<Node id="317">
+												<SimplePredicate field="double(route_id)" operator="lessOrEqual" value="31642.0"/>
+												<Node id="318" score="454.2857142857143">
+													<SimplePredicate field="double(stop_id)" operator="lessOrEqual" value="4277.0"/>
+												</Node>
+												<Node id="319" score="480.0">
+													<SimplePredicate field="double(stop_id)" operator="greaterThan" value="4277.0"/>
+												</Node>
+											</Node>
+											<Node id="320" score="326.6666666666667">
+												<SimplePredicate field="double(route_id)" operator="greaterThan" value="31642.0"/>
+											</Node>
+										</Node>
+									</Node>
+									<Node id="321">
+										<SimplePredicate field="double(stop_id)" operator="greaterThan" value="7818.0"/>
+										<Node id="322">
+											<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="456.9696960449219"/>
+											<Node id="323" score="240.0">
+												<SimplePredicate field="double(stop_id)" operator="lessOrEqual" value="11323.5"/>
+											</Node>
+											<Node id="324">
+												<SimplePredicate field="double(stop_id)" operator="greaterThan" value="11323.5"/>
+												<Node id="325" score="160.0">
+													<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="129.1999969482422"/>
+												</Node>
+												<Node id="326" score="180.0">
+													<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="129.1999969482422"/>
+												</Node>
+											</Node>
+										</Node>
+										<Node id="327">
+											<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="456.9696960449219"/>
+											<Node id="328">
+												<SimplePredicate field="double(route_id)" operator="lessOrEqual" value="31585.5"/>
+												<Node id="329" score="546.0">
+													<SimplePredicate field="double(range_x)" operator="lessOrEqual" value="258.5"/>
+												</Node>
+												<Node id="330" score="466.6666666666667">
+													<SimplePredicate field="double(range_x)" operator="greaterThan" value="258.5"/>
+												</Node>
+											</Node>
+											<Node id="331">
+												<SimplePredicate field="double(route_id)" operator="greaterThan" value="31585.5"/>
+												<Node id="332" score="379.5348837209302">
+													<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="205.2100830078125"/>
+												</Node>
+												<Node id="333" score="205.71428571428572">
+													<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="205.2100830078125"/>
+												</Node>
+											</Node>
+										</Node>
+									</Node>
+								</Node>
+								<Node id="334">
+									<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="215.22726440429688"/>
+									<Node id="335">
+										<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="199.19393920898438"/>
+										<Node id="336">
+											<SimplePredicate field="double(range_x)" operator="lessOrEqual" value="257.5"/>
+											<Node id="337">
+												<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="690.0"/>
+												<Node id="338" score="137.14285714285714">
+													<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="258.0"/>
+												</Node>
+												<Node id="339" score="315.7142857142857">
+													<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="258.0"/>
+												</Node>
+											</Node>
+											<Node id="340" score="400.0">
+												<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="690.0"/>
+											</Node>
+										</Node>
+										<Node id="341">
+											<SimplePredicate field="double(range_x)" operator="greaterThan" value="257.5"/>
+											<Node id="342">
+												<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="191.5543212890625"/>
+												<Node id="343" score="325.7142857142857">
+													<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="103.37992858886719"/>
+												</Node>
+												<Node id="344" score="406.53061224489795">
+													<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="103.37992858886719"/>
+												</Node>
+											</Node>
+											<Node id="345" score="333.75">
+												<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="191.5543212890625"/>
+											</Node>
+										</Node>
+									</Node>
+									<Node id="346">
+										<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="199.19393920898438"/>
+										<Node id="347">
+											<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="277.662353515625"/>
+											<Node id="348">
+												<SimplePredicate field="double(stop_id)" operator="lessOrEqual" value="5236.0"/>
+												<Node id="349" score="263.3333333333333">
+													<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="223.76686096191406"/>
+												</Node>
+												<Node id="350" score="365.08474576271186">
+													<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="223.76686096191406"/>
+												</Node>
+											</Node>
+											<Node id="351">
+												<SimplePredicate field="double(stop_id)" operator="greaterThan" value="5236.0"/>
+												<Node id="352" score="470.0">
+													<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="251.984375"/>
+												</Node>
+												<Node id="353" score="357.27272727272725">
+													<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="251.984375"/>
+												</Node>
+											</Node>
+										</Node>
+										<Node id="354">
+											<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="277.662353515625"/>
+											<Node id="355">
+												<SimplePredicate field="double(stop_id)" operator="lessOrEqual" value="1265.5"/>
+												<Node id="356" score="307.5">
+													<SimplePredicate field="double(range_x)" operator="lessOrEqual" value="259.5"/>
+												</Node>
+												<Node id="357" score="418.5">
+													<SimplePredicate field="double(range_x)" operator="greaterThan" value="259.5"/>
+												</Node>
+											</Node>
+											<Node id="358">
+												<SimplePredicate field="double(stop_id)" operator="greaterThan" value="1265.5"/>
+												<Node id="359" score="513.1578947368421">
+													<SimplePredicate field="double(range_x)" operator="lessOrEqual" value="264.5"/>
+												</Node>
+												<Node id="360" score="369.4736842105263">
+													<SimplePredicate field="double(range_x)" operator="greaterThan" value="264.5"/>
+												</Node>
+											</Node>
+										</Node>
+									</Node>
+								</Node>
+							</Node>
+						</Node>
+						<Node id="361">
+							<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="285.11297607421875"/>
+							<Node id="362">
+								<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="436.62908935546875"/>
+								<Node id="363">
+									<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="212.47808837890625"/>
+									<Node id="364">
+										<SimplePredicate field="double(route_id)" operator="lessOrEqual" value="31643.0"/>
+										<Node id="365">
+											<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="744.7058715820312"/>
+											<Node id="366">
+												<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="187.4666748046875"/>
+												<Node id="367" score="556.3636363636364">
+													<SimplePredicate field="double(stop_id)" operator="lessOrEqual" value="1973.5"/>
+												</Node>
+												<Node id="368" score="416.47058823529414">
+													<SimplePredicate field="double(stop_id)" operator="greaterThan" value="1973.5"/>
+												</Node>
+											</Node>
+											<Node id="369">
+												<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="187.4666748046875"/>
+												<Node id="370" score="145.71428571428572">
+													<SimplePredicate field="double(stop_id)" operator="lessOrEqual" value="6830.5"/>
+												</Node>
+												<Node id="371" score="288.0">
+													<SimplePredicate field="double(stop_id)" operator="greaterThan" value="6830.5"/>
+												</Node>
+											</Node>
+										</Node>
+										<Node id="372">
+											<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="744.7058715820312"/>
+											<Node id="373">
+												<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="390.2884521484375"/>
+												<Node id="374" score="940.0">
+													<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="823.0621948242188"/>
+												</Node>
+												<Node id="375" score="735.7894736842105">
+													<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="823.0621948242188"/>
+												</Node>
+											</Node>
+											<Node id="376" score="360.0">
+												<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="390.2884521484375"/>
+											</Node>
+										</Node>
+									</Node>
+									<Node id="377">
+										<SimplePredicate field="double(route_id)" operator="greaterThan" value="31643.0"/>
+										<Node id="378">
+											<SimplePredicate field="double(delayp_std)" operator="lessOrEqual" value="477.32025146484375"/>
+											<Node id="379">
+												<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="802.5"/>
+												<Node id="380" score="148.23529411764707">
+													<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="483.0"/>
+												</Node>
+												<Node id="381" score="249.8181818181818">
+													<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="483.0"/>
+												</Node>
+											</Node>
+											<Node id="382" score="81.81818181818181">
+												<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="802.5"/>
+											</Node>
+										</Node>
+										<Node id="383">
+											<SimplePredicate field="double(delayp_std)" operator="greaterThan" value="477.32025146484375"/>
+											<Node id="384">
+												<SimplePredicate field="double(route_id)" operator="lessOrEqual" value="31680.5"/>
+												<Node id="385" score="300.0">
+													<SimplePredicate field="double(delayp_std)" operator="lessOrEqual" value="731.052490234375"/>
+												</Node>
+												<Node id="386" score="240.0">
+													<SimplePredicate field="double(delayp_std)" operator="greaterThan" value="731.052490234375"/>
+												</Node>
+											</Node>
+											<Node id="387">
+												<SimplePredicate field="double(route_id)" operator="greaterThan" value="31680.5"/>
+												<Node id="388" score="376.3636363636364">
+													<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="372.97674560546875"/>
+												</Node>
+												<Node id="389" score="380.0">
+													<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="372.97674560546875"/>
+												</Node>
+											</Node>
+										</Node>
+									</Node>
+								</Node>
+								<Node id="390">
+									<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="212.47808837890625"/>
+									<Node id="391">
+										<SimplePredicate field="double(stop_id)" operator="lessOrEqual" value="11338.0"/>
+										<Node id="392">
+											<SimplePredicate field="double(delayp_std)" operator="lessOrEqual" value="492.80120849609375"/>
+											<Node id="393">
+												<SimplePredicate field="double(stop_id)" operator="lessOrEqual" value="5219.0"/>
+												<Node id="394" score="803.0769230769231">
+													<SimplePredicate field="double(range_x)" operator="lessOrEqual" value="255.5"/>
+												</Node>
+												<Node id="395" score="547.3170731707318">
+													<SimplePredicate field="double(range_x)" operator="greaterThan" value="255.5"/>
+												</Node>
+											</Node>
+											<Node id="396">
+												<SimplePredicate field="double(stop_id)" operator="greaterThan" value="5219.0"/>
+												<Node id="397" score="422.0">
+													<SimplePredicate field="double(stop_id)" operator="lessOrEqual" value="6589.5"/>
+												</Node>
+												<Node id="398" score="559.2307692307693">
+													<SimplePredicate field="double(stop_id)" operator="greaterThan" value="6589.5"/>
+												</Node>
+											</Node>
+										</Node>
+										<Node id="399">
+											<SimplePredicate field="double(delayp_std)" operator="greaterThan" value="492.80120849609375"/>
+											<Node id="400">
+												<SimplePredicate field="double(range_x)" operator="lessOrEqual" value="261.0"/>
+												<Node id="401" score="452.3076923076923">
+													<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="368.0"/>
+												</Node>
+												<Node id="402" score="408.0">
+													<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="368.0"/>
+												</Node>
+											</Node>
+											<Node id="403" score="283.6363636363636">
+												<SimplePredicate field="double(range_x)" operator="greaterThan" value="261.0"/>
+											</Node>
+										</Node>
+									</Node>
+									<Node id="404">
+										<SimplePredicate field="double(stop_id)" operator="greaterThan" value="11338.0"/>
+										<Node id="405">
+											<SimplePredicate field="double(delayp_std)" operator="lessOrEqual" value="330.65875244140625"/>
+											<Node id="406" score="140.0">
+												<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="519.0"/>
+											</Node>
+											<Node id="407">
+												<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="519.0"/>
+												<Node id="408" score="371.25">
+													<SimplePredicate field="double(stop_id)" operator="lessOrEqual" value="11976.5"/>
+												</Node>
+												<Node id="409" score="315.0">
+													<SimplePredicate field="double(stop_id)" operator="greaterThan" value="11976.5"/>
+												</Node>
+											</Node>
+										</Node>
+										<Node id="410" score="535.7142857142857">
+											<SimplePredicate field="double(delayp_std)" operator="greaterThan" value="330.65875244140625"/>
+										</Node>
+									</Node>
+								</Node>
+							</Node>
+							<Node id="411">
+								<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="436.62908935546875"/>
+								<Node id="412">
+									<SimplePredicate field="double(route_id)" operator="lessOrEqual" value="31683.5"/>
+									<Node id="413">
+										<SimplePredicate field="double(delayp_std)" operator="lessOrEqual" value="1220.352294921875"/>
+										<Node id="414">
+											<SimplePredicate field="double(range_x)" operator="lessOrEqual" value="260.5"/>
+											<Node id="415">
+												<SimplePredicate field="double(delayp_std)" operator="lessOrEqual" value="381.8848876953125"/>
+												<Node id="416" score="893.8461538461538">
+													<SimplePredicate field="double(stop_id)" operator="lessOrEqual" value="11747.5"/>
+												</Node>
+												<Node id="417" score="1267.5">
+													<SimplePredicate field="double(stop_id)" operator="greaterThan" value="11747.5"/>
+												</Node>
+											</Node>
+											<Node id="418">
+												<SimplePredicate field="double(delayp_std)" operator="greaterThan" value="381.8848876953125"/>
+												<Node id="419" score="420.0">
+													<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="249.66346740722656"/>
+												</Node>
+												<Node id="420" score="731.8604651162791">
+													<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="249.66346740722656"/>
+												</Node>
+											</Node>
+										</Node>
+										<Node id="421">
+											<SimplePredicate field="double(range_x)" operator="greaterThan" value="260.5"/>
+											<Node id="422">
+												<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="690.0"/>
+												<Node id="423" score="966.0">
+													<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="642.3529052734375"/>
+												</Node>
+												<Node id="424" score="1368.0">
+													<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="642.3529052734375"/>
+												</Node>
+											</Node>
+											<Node id="425">
+												<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="690.0"/>
+												<Node id="426" score="813.1034482758621">
+													<SimplePredicate field="double(delayp_std)" operator="lessOrEqual" value="581.0380859375"/>
+												</Node>
+												<Node id="427" score="1140.0">
+													<SimplePredicate field="double(delayp_std)" operator="greaterThan" value="581.0380859375"/>
+												</Node>
+											</Node>
+										</Node>
+									</Node>
+									<Node id="428" score="261.8181818181818">
+										<SimplePredicate field="double(delayp_std)" operator="greaterThan" value="1220.352294921875"/>
+									</Node>
+								</Node>
+								<Node id="429">
+									<SimplePredicate field="double(route_id)" operator="greaterThan" value="31683.5"/>
+									<Node id="430">
+										<SimplePredicate field="double(delayp_std)" operator="lessOrEqual" value="778.696044921875"/>
+										<Node id="431">
+											<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="290.0"/>
+											<Node id="432">
+												<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="1245.0"/>
+												<Node id="433" score="792.0">
+													<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="456.644287109375"/>
+												</Node>
+												<Node id="434" score="533.0232558139535">
+													<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="456.644287109375"/>
+												</Node>
+											</Node>
+											<Node id="435" score="1002.8571428571429">
+												<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="1245.0"/>
+											</Node>
+										</Node>
+										<Node id="436" score="0.0">
+											<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="290.0"/>
+										</Node>
+									</Node>
+									<Node id="437">
+										<SimplePredicate field="double(delayp_std)" operator="greaterThan" value="778.696044921875"/>
+										<Node id="438" score="67.5">
+											<SimplePredicate field="double(route_id)" operator="lessOrEqual" value="31700.5"/>
+										</Node>
+										<Node id="439" score="0.0">
+											<SimplePredicate field="double(route_id)" operator="greaterThan" value="31700.5"/>
+										</Node>
+									</Node>
+								</Node>
+							</Node>
+						</Node>
+					</Node>
+					<Node id="440">
+						<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="399.0909118652344"/>
+						<Node id="441">
+							<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="1411.666748046875"/>
+							<Node id="442">
+								<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="724.9163818359375"/>
+								<Node id="443">
+									<SimplePredicate field="double(delayp_std)" operator="lessOrEqual" value="40.186866760253906"/>
+									<Node id="444">
+										<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="625.7142944335938"/>
+										<Node id="445">
+											<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="530.587158203125"/>
+											<Node id="446" score="360.0">
+												<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="432.10906982421875"/>
+											</Node>
+											<Node id="447">
+												<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="432.10906982421875"/>
+												<Node id="448" score="603.6363636363636">
+													<SimplePredicate field="double(stop_id)" operator="lessOrEqual" value="5549.0"/>
+												</Node>
+												<Node id="449" score="521.2903225806451">
+													<SimplePredicate field="double(stop_id)" operator="greaterThan" value="5549.0"/>
+												</Node>
+											</Node>
+										</Node>
+										<Node id="450" score="254.11764705882354">
+											<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="530.587158203125"/>
+										</Node>
+									</Node>
+									<Node id="451">
+										<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="625.7142944335938"/>
+										<Node id="452">
+											<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="655.3846435546875"/>
+											<Node id="453">
+												<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="456.5909118652344"/>
+												<Node id="454" score="605.5555555555555">
+													<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="436.058837890625"/>
+												</Node>
+												<Node id="455" score="372.0">
+													<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="436.058837890625"/>
+												</Node>
+											</Node>
+											<Node id="456">
+												<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="456.5909118652344"/>
+												<Node id="457" score="738.6666666666666">
+													<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="523.6363525390625"/>
+												</Node>
+												<Node id="458" score="610.2272727272727">
+													<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="523.6363525390625"/>
+												</Node>
+											</Node>
+										</Node>
+										<Node id="459" score="975.0">
+											<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="655.3846435546875"/>
+										</Node>
+									</Node>
+								</Node>
+								<Node id="460">
+									<SimplePredicate field="double(delayp_std)" operator="greaterThan" value="40.186866760253906"/>
+									<Node id="461">
+										<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="411.5809326171875"/>
+										<Node id="462">
+											<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="463.84613037109375"/>
+											<Node id="463">
+												<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="383.5264892578125"/>
+												<Node id="464" score="340.0">
+													<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="303.41632080078125"/>
+												</Node>
+												<Node id="465" score="496.875">
+													<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="303.41632080078125"/>
+												</Node>
+											</Node>
+											<Node id="466" score="677.1428571428571">
+												<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="383.5264892578125"/>
+											</Node>
+										</Node>
+										<Node id="467">
+											<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="463.84613037109375"/>
+											<Node id="468">
+												<SimplePredicate field="double(route_id)" operator="lessOrEqual" value="31652.5"/>
+												<Node id="469" score="699.9230769230769">
+													<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="847.5"/>
+												</Node>
+												<Node id="470" score="858.0">
+													<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="847.5"/>
+												</Node>
+											</Node>
+											<Node id="471">
+												<SimplePredicate field="double(route_id)" operator="greaterThan" value="31652.5"/>
+												<Node id="472" score="622.5">
+													<SimplePredicate field="double(delayp_std)" operator="lessOrEqual" value="182.724365234375"/>
+												</Node>
+												<Node id="473" score="501.8181818181818">
+													<SimplePredicate field="double(delayp_std)" operator="greaterThan" value="182.724365234375"/>
+												</Node>
+											</Node>
+										</Node>
+									</Node>
+									<Node id="474">
+										<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="411.5809326171875"/>
+										<Node id="475">
+											<SimplePredicate field="double(route_id)" operator="lessOrEqual" value="31715.5"/>
+											<Node id="476">
+												<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="650.1415405273438"/>
+												<Node id="477" score="910.632911392405">
+													<SimplePredicate field="double(range_x)" operator="lessOrEqual" value="257.5"/>
+												</Node>
+												<Node id="478" score="784.8">
+													<SimplePredicate field="double(range_x)" operator="greaterThan" value="257.5"/>
+												</Node>
+											</Node>
+											<Node id="479" score="1720.0">
+												<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="650.1415405273438"/>
+											</Node>
+										</Node>
+										<Node id="480">
+											<SimplePredicate field="double(route_id)" operator="greaterThan" value="31715.5"/>
+											<Node id="481" score="920.0">
+												<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="520.0"/>
+											</Node>
+											<Node id="482" score="94.28571428571429">
+												<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="520.0"/>
+											</Node>
+										</Node>
+									</Node>
+								</Node>
+							</Node>
+							<Node id="483">
+								<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="724.9163818359375"/>
+								<Node id="484">
+									<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="858.6666259765625"/>
+									<Node id="485">
+										<SimplePredicate field="double(route_id)" operator="lessOrEqual" value="31692.0"/>
+										<Node id="486">
+											<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="364.5184326171875"/>
+											<Node id="487" score="960.0">
+												<SimplePredicate field="double(range_x)" operator="lessOrEqual" value="262.0"/>
+											</Node>
+											<Node id="488">
+												<SimplePredicate field="double(range_x)" operator="greaterThan" value="262.0"/>
+												<Node id="489" score="892.5">
+													<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="741.9642944335938"/>
+												</Node>
+												<Node id="490" score="836.1290322580645">
+													<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="741.9642944335938"/>
+												</Node>
+											</Node>
+										</Node>
+										<Node id="491">
+											<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="364.5184326171875"/>
+											<Node id="492">
+												<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="765.7142944335938"/>
+												<Node id="493" score="1213.3333333333333">
+													<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="520.1347045898438"/>
+												</Node>
+												<Node id="494" score="1352.3076923076924">
+													<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="520.1347045898438"/>
+												</Node>
+											</Node>
+											<Node id="495">
+												<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="765.7142944335938"/>
+												<Node id="496" score="1041.8181818181818">
+													<SimplePredicate field="double(route_id)" operator="lessOrEqual" value="31601.5"/>
+												</Node>
+												<Node id="497" score="1037.142857142857">
+													<SimplePredicate field="double(route_id)" operator="greaterThan" value="31601.5"/>
+												</Node>
+											</Node>
+										</Node>
+									</Node>
+									<Node id="498">
+										<SimplePredicate field="double(route_id)" operator="greaterThan" value="31692.0"/>
+										<Node id="499" score="480.0">
+											<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="510.0"/>
+										</Node>
+										<Node id="500">
+											<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="510.0"/>
+											<Node id="501">
+												<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="1017.2100830078125"/>
+												<Node id="502" score="738.4090909090909">
+													<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="892.0"/>
+												</Node>
+												<Node id="503" score="892.5">
+													<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="892.0"/>
+												</Node>
+											</Node>
+											<Node id="504">
+												<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="1017.2100830078125"/>
+												<Node id="505" score="947.8481012658228">
+													<SimplePredicate field="double(range_x)" operator="lessOrEqual" value="264.5"/>
+												</Node>
+												<Node id="506" score="581.5384615384615">
+													<SimplePredicate field="double(range_x)" operator="greaterThan" value="264.5"/>
+												</Node>
+											</Node>
+										</Node>
+									</Node>
+								</Node>
+								<Node id="507">
+									<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="858.6666259765625"/>
+									<Node id="508">
+										<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="1369.0909423828125"/>
+										<Node id="509">
+											<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="979.4649658203125"/>
+											<Node id="510">
+												<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="530.5501708984375"/>
+												<Node id="511" score="1063.3663366336634">
+													<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="510.24169921875"/>
+												</Node>
+												<Node id="512" score="1275.5555555555557">
+													<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="510.24169921875"/>
+												</Node>
+											</Node>
+											<Node id="513">
+												<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="530.5501708984375"/>
+												<Node id="514" score="767.7966101694915">
+													<SimplePredicate field="double(delayp_std)" operator="lessOrEqual" value="920.10302734375"/>
+												</Node>
+												<Node id="515" score="1045.1612903225807">
+													<SimplePredicate field="double(delayp_std)" operator="greaterThan" value="920.10302734375"/>
+												</Node>
+											</Node>
+										</Node>
+										<Node id="516" score="1860.0">
+											<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="979.4649658203125"/>
+										</Node>
+									</Node>
+									<Node id="517">
+										<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="1369.0909423828125"/>
+										<Node id="518" score="1500.0">
+											<SimplePredicate field="double(route_id)" operator="lessOrEqual" value="31683.0"/>
+										</Node>
+										<Node id="519" score="1696.3636363636363">
+											<SimplePredicate field="double(route_id)" operator="greaterThan" value="31683.0"/>
+										</Node>
+									</Node>
+								</Node>
+							</Node>
+						</Node>
+						<Node id="520">
+							<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="1411.666748046875"/>
+							<Node id="521">
+								<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="1580.568115234375"/>
+								<Node id="522">
+									<SimplePredicate field="double(delayp_std)" operator="lessOrEqual" value="496.9690246582031"/>
+									<Node id="523">
+										<SimplePredicate field="double(route_id)" operator="lessOrEqual" value="31642.5"/>
+										<Node id="524">
+											<SimplePredicate field="double(range_x)" operator="lessOrEqual" value="260.5"/>
+											<Node id="525" score="1980.0">
+												<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="977.752197265625"/>
+											</Node>
+											<Node id="526">
+												<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="977.752197265625"/>
+												<Node id="527" score="2275.714285714286">
+													<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="1316.41259765625"/>
+												</Node>
+												<Node id="528" score="2412.0">
+													<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="1316.41259765625"/>
+												</Node>
+											</Node>
+										</Node>
+										<Node id="529">
+											<SimplePredicate field="double(range_x)" operator="greaterThan" value="260.5"/>
+											<Node id="530">
+												<SimplePredicate field="double(delayp_std)" operator="lessOrEqual" value="190.8140411376953"/>
+												<Node id="531" score="1680.0">
+													<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="1202.3076171875"/>
+												</Node>
+												<Node id="532" score="1320.0">
+													<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="1202.3076171875"/>
+												</Node>
+											</Node>
+											<Node id="533">
+												<SimplePredicate field="double(delayp_std)" operator="greaterThan" value="190.8140411376953"/>
+												<Node id="534" score="1766.6666666666667">
+													<SimplePredicate field="double(delayp_mean)" operator="lessOrEqual" value="1891.0"/>
+												</Node>
+												<Node id="535" score="1676.25">
+													<SimplePredicate field="double(delayp_mean)" operator="greaterThan" value="1891.0"/>
+												</Node>
+											</Node>
+										</Node>
+									</Node>
+									<Node id="536">
+										<SimplePredicate field="double(route_id)" operator="greaterThan" value="31642.5"/>
+										<Node id="537">
+											<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="1284.835205078125"/>
+											<Node id="538">
+												<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="843.9945068359375"/>
+												<Node id="539" score="1538.5714285714287">
+													<SimplePredicate field="double(range_x)" operator="lessOrEqual" value="259.5"/>
+												</Node>
+												<Node id="540" score="1405.0">
+													<SimplePredicate field="double(range_x)" operator="greaterThan" value="259.5"/>
+												</Node>
+											</Node>
+											<Node id="541">
+												<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="843.9945068359375"/>
+												<Node id="542" score="917.1428571428571">
+													<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="943.1094970703125"/>
+												</Node>
+												<Node id="543" score="1200.0">
+													<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="943.1094970703125"/>
+												</Node>
+											</Node>
+										</Node>
+										<Node id="544">
+											<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="1284.835205078125"/>
+											<Node id="545" score="1732.0">
+												<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="1458.9610595703125"/>
+											</Node>
+											<Node id="546" score="1602.857142857143">
+												<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="1458.9610595703125"/>
+											</Node>
+										</Node>
+									</Node>
+								</Node>
+								<Node id="547">
+									<SimplePredicate field="double(delayp_std)" operator="greaterThan" value="496.9690246582031"/>
+									<Node id="548">
+										<SimplePredicate field="double(range_x)" operator="lessOrEqual" value="262.0"/>
+										<Node id="549" score="727.5">
+											<SimplePredicate field="double(range_x)" operator="lessOrEqual" value="258.5"/>
+										</Node>
+										<Node id="550" score="752.7272727272727">
+											<SimplePredicate field="double(range_x)" operator="greaterThan" value="258.5"/>
+										</Node>
+									</Node>
+									<Node id="551">
+										<SimplePredicate field="double(range_x)" operator="greaterThan" value="262.0"/>
+										<Node id="552">
+											<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="937.75244140625"/>
+											<Node id="553" score="968.5714285714286">
+												<SimplePredicate field="double(stop_id)" operator="lessOrEqual" value="9053.0"/>
+											</Node>
+											<Node id="554">
+												<SimplePredicate field="double(stop_id)" operator="greaterThan" value="9053.0"/>
+												<Node id="555" score="1076.842105263158">
+													<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="633.5294189453125"/>
+												</Node>
+												<Node id="556" score="1125.0">
+													<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="633.5294189453125"/>
+												</Node>
+											</Node>
+										</Node>
+										<Node id="557">
+											<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="937.75244140625"/>
+											<Node id="558" score="1169.032258064516">
+												<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="1125.53173828125"/>
+											</Node>
+											<Node id="559" score="1287.6923076923076">
+												<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="1125.53173828125"/>
+											</Node>
+										</Node>
+									</Node>
+								</Node>
+							</Node>
+							<Node id="560">
+								<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="1580.568115234375"/>
+								<Node id="561" score="1980.0">
+									<SimplePredicate field="double(delayh_std)" operator="lessOrEqual" value="831.5994873046875"/>
+								</Node>
+								<Node id="562">
+									<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="831.5994873046875"/>
+									<Node id="563" score="3317.1428571428573">
+										<SimplePredicate field="double(delayp_std)" operator="lessOrEqual" value="62.26494216918945"/>
+									</Node>
+									<Node id="564">
+										<SimplePredicate field="double(delayp_std)" operator="greaterThan" value="62.26494216918945"/>
+										<Node id="565" score="3180.0">
+											<SimplePredicate field="double(delayp_std)" operator="lessOrEqual" value="840.48779296875"/>
+										</Node>
+										<Node id="566" score="3060.0">
+											<SimplePredicate field="double(delayp_std)" operator="greaterThan" value="840.48779296875"/>
+										</Node>
+									</Node>
+								</Node>
+							</Node>
+						</Node>
+					</Node>
+				</Node>
+			</Node>
+			<Node id="567">
+				<SimplePredicate field="double(delayh_std)" operator="greaterThan" value="3008.17138671875"/>
+				<Node id="568" score="5862.857142857143">
+					<SimplePredicate field="double(delayh_mean)" operator="lessOrEqual" value="4297.5"/>
+				</Node>
+				<Node id="569" score="10260.0">
+					<SimplePredicate field="double(delayh_mean)" operator="greaterThan" value="4297.5"/>
+				</Node>
+			</Node>
+		</Node>
+	</TreeModel>
+</PMML>
